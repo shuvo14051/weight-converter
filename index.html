@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <style>
+        body {
+            padding: 110px;
+            background-color: #f99afa;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 120px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Weight Converter</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="kg">Kilograms (kg)</label>
+                <input type="number" class="form-control" id="kg" oninput="convert('kg')" onclick="clearAllExcept('kg')">
+            </div>
+            <div class="col-md-3">
+                <label for="lb">Pounds (lb)</label>
+                <input type="number" class="form-control" id="lb" oninput="convert('lb')" onclick="clearAllExcept('lb')">
+            </div>
+            <div class="col-md-3">
+                <label for="oz">Ounces (oz)</label>
+                <input type="number" class="form-control" id="oz" oninput="convert('oz')" onclick="clearAllExcept('oz')">
+            </div>
+            <div class="col-md-3">
+                <label for="gram">Grams (g)</label>
+                <input type="number" class="form-control" id="gram" oninput="convert('gram')" onclick="clearAllExcept('gram')">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convert(unit) {
+            const kg = document.getElementById('kg').value;
+            const lb = document.getElementById('lb').value;
+            const oz = document.getElementById('oz').value;
+            const gram = document.getElementById('gram').value;
+
+            switch (unit) {
+                case 'kg':
+                    document.getElementById('lb').value = kg * 2.20462;
+                    document.getElementById('oz').value = kg * 35.274;
+                    document.getElementById('gram').value = kg * 1000;
+                    break;
+                case 'lb':
+                    document.getElementById('kg').value = lb / 2.20462;
+                    document.getElementById('oz').value = lb * 16;
+                    document.getElementById('gram').value = lb * 453.592;
+                    break;
+                case 'oz':
+                    document.getElementById('kg').value = oz / 35.274;
+                    document.getElementById('lb').value = oz / 16;
+                    document.getElementById('gram').value = oz * 28.3495;
+                    break;
+                case 'gram':
+                    document.getElementById('kg').value = gram / 1000;
+                    document.getElementById('lb').value = gram / 453.592;
+                    document.getElementById('oz').value = gram / 28.3495;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function clearAllExcept(unit) {
+            const units = ['kg', 'lb', 'oz', 'gram'];
+            units.forEach(u => {
+                if (u !== unit) {
+                    document.getElementById(u).value = '';
+                }
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
